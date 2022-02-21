@@ -1,0 +1,13 @@
+{% extends 'discussion/base.html' %}
+{% block content%}
+<h3>{{ object.author }} - {{ object.date_posted }} -> {{ object.question }}</h3>
+    <a href="{% url 'answer' object.pk %}">Add an answer</a>
+    {% if object.comments.all %}
+        <h5>Answers. .</h5>
+        {% for comment in object.comments.all %}
+            <h4>{{comment.author}} - {{comment.date_posted}} -> {{comment.answer}}</h4>
+        {% endfor%}
+    {% else %}
+        <p>No answers for this question yet, add one</p>
+    {% endif%}
+{% endblock content %}

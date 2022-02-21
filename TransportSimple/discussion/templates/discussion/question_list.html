@@ -1,0 +1,20 @@
+{% extends 'discussion/base.html' %}
+{% block content%}
+	{% for object in objects %}
+		<h3>{{ object.author }} - {{ object.date_posted }} -> {{ object.question }}</h3>
+		<a href="{% url 'answer' object.pk %}">Add an answer</a>
+		{% if object.comments.all %}
+			<h5>Answers. .</h5>
+			{% for comment in object.comments.all %}
+				<h4>{{comment.author}} - {{comment.date_posted}} -> {{comment.answer}}</h4>
+				<form action="{% url 'like' comment.pk %}" method="POST">
+					{% csrf_token %}
+					<button type="submit", name="answer_id", value="{{ comment.id }}" >Like</button>
+				</form>
+			{% endfor %}
+		{% else %}
+			<p>No answers for this question yet, add one</p>
+		{% endif %}
+		<br>
+	{% endfor %}
+{% endblock content %}	

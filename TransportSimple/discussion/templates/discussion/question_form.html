@@ -1,0 +1,9 @@
+{% extends 'discussion/base.html' %}
+{% block content%}
+	<form method="POST">
+		{% csrf_token %}
+		<h2>Post a question</h2>
+		{{form.as_p}}
+		<button>Post</button>
+	</form>
+{% endblock content %}
